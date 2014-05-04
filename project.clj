@@ -12,5 +12,6 @@
   :plugins [[lein-ring "0.8.10"]]
   :ring {:handler global-growth.web/handler}
   :main ^:skip-aot global-growth.core
-  :target-path "target/%s")
+  :target-path "target/%s"
+  :min-lein-version "2.0.0")
 
