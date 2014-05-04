@@ -99,8 +99,12 @@
 (defroutes main-routes
   (GET "/" [] (main-page))
   (GET "/indicators" [indicator1 indicator2 year]
-        (view-indicators indicator1 indicator2 year)))
+        (view-indicators indicator1 indicator2 year))
+  )
 
-(def handler (site main-routes))
+(def handler
+  ;(site main-routes)
+  (main-page)
+  )
 
 
