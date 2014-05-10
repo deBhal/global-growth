@@ -4,7 +4,8 @@
             [compojure.handler :refer [site]]
             [hiccup.core :as hiccup]
             [hiccup.page :as page]
-            [hiccup.form :as form]))
+            [hiccup.form :as form]
+            [ring.adapter.jetty :as jetty]))
 
 (defn app
   [request]
@@ -103,8 +104,20 @@
   )
 
 (def handler
-  ;(site main-routes)
-  (main-page)
+  (site main-routes)
+  ;(main-page)
+;;   (page/html5
+;;    [:head
+;;     [:title "Hard-code"]
+;;     ]
+;;    [:body
+
+;;     [:div "A div"]])
   )
 
-
+(defn -main
+  [& args]
+  (jetty/run-jetty
+   handler
+   {:port (Integer/parseInt (get (System/getenv) "OPENSHIFT_CLOJURE_HTTP_PORT" "3000"))
+    :host (get (System/getenv) "OPENSHIFT_CLOJURE_HTTP_IP" "0.0.0.0")}))
